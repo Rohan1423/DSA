@@ -31,11 +31,27 @@ void rotateRight (int arr[], int n, int k){  // Using Extra Array  T.C O(n)  S.C
         arr[i]=temp[i];
     }
 }
+
+ void reverseArr (int arr[], int start, int end){
+    while(start<end){
+        swap(arr[start],arr[end]);  // swapping
+        start++;
+        end--;
+    }
+ }
+
+ void rotateByReversing(int arr[],int n, int k){  //------Reverse Method (Optimal & Most Asked)  T.C O(n)  S.C O(1)------
+    k=k%n;
+
+    reverseArr(arr,0,n-1);  // reverse full arr
+    reverseArr(arr,0,k-1);  // reverse only k elements
+    reverseArr(arr,k,n-1);  // reverse only non-k elements
+ }
 int main() {
     int arr[] = {1, 2, 3, 4, 5};
     int n = 5, k = 2;
 
-    rotateRight(arr, n, k);
+    rotateByReversing(arr, n, k);
 
     for (int i = 0; i < n; i++){
         cout << arr[i] << " ";
