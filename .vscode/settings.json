@@ -1,0 +1,7 @@
+{
+    "editor.inlineSuggest.edits.allowCodeShifting": "never",
+    "editor.inlineSuggest.edits.renderSideBySide": "never",
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "editor.inlineSuggest.enabled": false,
+    "editor.screenReaderAnnounceInlineSuggestion": false
+}
