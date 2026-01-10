@@ -1,0 +1,10 @@
+{
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "editor.screenReaderAnnounceInlineSuggestion": false,
+    "github.copilot.nextEditSuggestions.fixes": false,
+    "github.copilot.renameSuggestions.triggerAutomatically": false,
+    "editor.suggest.selectionMode": "never",
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.snippetSuggestions": "none",
+    "editor.acceptSuggestionOnCommitCharacter": false
+}
