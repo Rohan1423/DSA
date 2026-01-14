@@ -18,7 +18,7 @@ int waterStored(int arr[],int n){ // Brute Force Approach  T.C O(n x n)  S.C O(1
     
 }
 
-int waterTrapped(int arr[],int n){ // Prefix & Suffix Arrays (Better) T.C O(n). S.C O(n)
+int waterTrapped(int arr[],int n){ // Prefix & Suffix Arrays (Better) T.C O(n). S.C O(n) Precompute: leftMax[i] & rightMax[i]
     int waterCap=0;
     int leftMax[n];int rightMax[n];
     leftMax[0]=arr[0];
@@ -34,8 +34,66 @@ int waterTrapped(int arr[],int n){ // Prefix & Suffix Arrays (Better) T.C O(n). 
     }
     return waterCap;
 }
+
+int waterCollected(int height[], int n) { // Two Pointer (Optimal) T.C O(n) O(1)
+
+    // Left pointer starts from beginning of array
+    int left = 0;
+
+    // Right pointer starts from end of array
+    int right = n - 1;
+
+    // Stores maximum height seen so far from left side
+    int leftMax = 0;
+
+    // Stores maximum height seen so far from right side
+    int rightMax = 0;
+
+    // Total water trapped
+    int water = 0;
+
+    // Continue until both pointers meet
+    while (left < right) {
+
+        // Always process the smaller height
+        // Water depends on the smaller boundary
+        if (height[left] <= height[right]) {
+
+            // If current bar is higher than leftMax
+            // Update leftMax (no water trapped)
+            if (height[left] > leftMax) {
+                leftMax = height[left];
+            }
+            // Else water can be trapped above this bar
+            else {
+                water += leftMax - height[left];
+            }
+
+            // Move left pointer forward
+            left++;
+        }
+        else {
+
+            // If current bar is higher than rightMax
+            // Update rightMax (no water trapped)
+            if (height[right] >= rightMax) {
+                rightMax = height[right];
+            }
+            // Else water can be trapped above this bar
+            else {
+                water += rightMax - height[right];
+            }
+
+            // Move right pointer backward
+            right--;
+        }
+    }
+
+    // Return total trapped water
+    return water;
+}
 int main (){
     int arr[]={4,2,0,3,2,5};
     int n=6;
-    cout<<waterStored(arr,n)<<endl;
+    cout<<waterCollected(arr,n)<<endl;
 }
