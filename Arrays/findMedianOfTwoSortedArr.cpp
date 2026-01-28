@@ -53,6 +53,36 @@ double findMedianBetter(int a[], int n, int b[],int m){  // Better (Two pointers
         return (prev+curr)/2.0;
     }
 }
+
+double findMedianOptimal(int a[],int n,int b[],int m){  // Optimal (Binary Search) BEST T.C O(log(min(n,m)) S.C O(1)
+    // Ensure a is smaller array
+    if (n > m) return findMedian(b, m, a, n);
+
+    int low = 0, high = n;
+
+    while (low <= high) {
+        int cut1 = (low + high) / 2;
+        int cut2 = (n + m + 1) / 2 - cut1;
+
+        int left1  = (cut1 == 0) ? INT_MIN : a[cut1 - 1];
+        int left2  = (cut2 == 0) ? INT_MIN : b[cut2 - 1];
+        int right1 = (cut1 == n) ? INT_MAX : a[cut1];
+        int right2 = (cut2 == m) ? INT_MAX : b[cut2];
+
+        if (left1 <= right2 && left2 <= right1) {
+            if ((n + m) % 2 == 0)
+                return (max(left1, left2) + min(right1, right2)) / 2.0;
+            else
+                return max(left1, left2);
+        }
+        else if (left1 > right2)
+            high = cut1 - 1;
+        else
+            low = cut1 + 1;
+    }
+    return 0.0;
+}
+
 int main() {
     int a[] = {1, 3, 5};
     int b[] = {2, 4, 6};
@@ -60,6 +90,6 @@ int main() {
     int n = 3;
     int m = 3;
 
-    cout << "Median = " << findMedianBetter(a, n, b, m);
+    cout << "Median = " << findMedianOptimal(a, n, b, m);
     return 0;
 }
